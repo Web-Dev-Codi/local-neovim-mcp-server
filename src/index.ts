@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
@@ -135,19 +133,19 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     switch (name) {
       case 'search_nvim_docs':
         return await docsService.searchDocs(args?.query as string, args?.type as string || 'all');
-      
+
       case 'get_nvim_help':
         return await docsService.getHelp(args?.topic as string);
-      
+
       case 'validate_nvim_config':
         return await configService.validateConfig(args?.config as string, args?.filetype as string || 'lua');
-      
+
       case 'generate_nvim_config':
         return await configService.generateConfig(args?.use_case as string, args?.description as string);
-      
+
       case 'explain_nvim_concept':
         return await docsService.explainConcept(args?.concept as string);
-      
+
       default:
         throw new Error(`Tool ${name} not found`);
     }
